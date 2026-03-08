@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../widgets/slide_action_button.dart';
+import '../../../map/presentation/pages/map_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -155,9 +156,7 @@ class _ActionButtonsSection extends StatelessWidget {
           knobColor: Colors.white,
           iconColor: AppColors.primary,
           onSubmit: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Recorrido iniciado')),
-            );
+            Navigator.pushNamed(context, '/map');
           },
         ),
         const SizedBox(height: 16),
