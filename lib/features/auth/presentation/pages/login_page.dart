@@ -6,55 +6,44 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            Expanded(
-              flex: 4,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.shield_outlined,
-                        size: 72,
-                        color: Colors.white70,
-                      ),
-                      const SizedBox(width: 14),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Guardian',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700,
-                            ),
+            Positioned(
+              top: 78,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Hero(
+                    tag: 'guardian_shield',
+                    child: Material(
+                      color: Colors.transparent,
+                      child: ClipRect(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          widthFactor: 0.5,
+                          child: Icon(
+                            Icons.shield_outlined,
+                            size: 150,
+                            color: AppColors.shieldOverlay,
                           ),
-                          SizedBox(height: 4),
-                          Text(
-                            'Siempre contigo',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  const SizedBox(width: 12),
+                  const _BrandBlock(),
+                ],
               ),
             ),
-            Expanded(
-              flex: 6,
+            Align(
+              alignment: Alignment.bottomCenter,
               child: Container(
+                height: screenHeight * 0.66,
                 width: double.infinity,
                 padding: const EdgeInsets.fromLTRB(24, 28, 24, 20),
                 decoration: const BoxDecoration(
@@ -74,6 +63,37 @@ class LoginPage extends StatelessWidget {
   }
 }
 
+class _BrandBlock extends StatelessWidget {
+  const _BrandBlock();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 18),
+        Text(
+          'Guardian',
+          style: TextStyle(
+            color: AppColors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        SizedBox(height: 4),
+        Text(
+          'Siempre contigo',
+          style: TextStyle(
+            color: AppColors.white,
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class _LoginForm extends StatelessWidget {
   const _LoginForm();
 
@@ -83,7 +103,7 @@ class _LoginForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Login',
+          'Iniciar Sesión',
           style: TextStyle(
             color: AppColors.primary,
             fontSize: 26,
@@ -92,81 +112,79 @@ class _LoginForm extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         TextField(
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Correo',
-            prefixIcon: Icon(
-              Icons.mail_outline,
-              size: 18,
-              color: AppColors.textSecondary,
-            ),
+            prefixIcon: Icon(Icons.mail_outline, size: 18),
           ),
         ),
         const SizedBox(height: 14),
         TextField(
           obscureText: true,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Contraseña',
-            prefixIcon: Icon(
-              Icons.lock_outline,
-              size: 18,
-              color: AppColors.textSecondary,
-            ),
+            prefixIcon: Icon(Icons.lock_outline, size: 18),
           ),
         ),
         const SizedBox(height: 18),
         ElevatedButton(
           onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Botón Login presionado'),
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const PlaceholderPage(
+                  title: 'Home temporal',
+                ),
               ),
             );
           },
-          child: const Text('Login'),
+          child: const Text('Iniciar Sesión'),
         ),
         const SizedBox(height: 28),
-        Row(
-          children: const [
-            Expanded(child: Divider(color: Colors.black26)),
+        const Row(
+          children: [
+            Expanded(
+              child: Divider(
+                color: AppColors.divider,
+                thickness: 0.8,
+              ),
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Text(
-                'Or login with',
+                'Iniciar sesión con',
                 style: TextStyle(
                   fontSize: 12,
                   color: AppColors.textSecondary,
                 ),
               ),
             ),
-            Expanded(child: Divider(color: Colors.black26)),
+            Expanded(
+              child: Divider(
+                color: AppColors.divider,
+                thickness: 0.8,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 22),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _SocialButton(
+            _SocialIconButton(
               icon: Icons.facebook,
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Facebook presionado')),
-                );
+                _showMessage(context, 'Facebook presionado');
               },
             ),
-            _SocialButton(
+            _SocialIconButton(
               icon: Icons.g_mobiledata,
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Google presionado')),
-                );
+                _showMessage(context, 'Google presionado');
               },
             ),
-            _SocialButton(
+            _SocialIconButton(
               icon: Icons.apple,
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Apple presionado')),
-                );
+                _showMessage(context, 'Apple presionado');
               },
             ),
           ],
@@ -175,29 +193,33 @@ class _LoginForm extends StatelessWidget {
         Center(
           child: TextButton(
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Ir a registro')),
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => const PlaceholderPage(
+                    title: 'Registro temporal',
+                  ),
+                ),
               );
             },
-            child: const Text(
-              'Registrate',
-              style: TextStyle(
-                color: AppColors.primary,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+            child: const Text('Registrate'),
           ),
         ),
       ],
     );
   }
+
+  static void _showMessage(BuildContext context, String text) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(text)),
+    );
+  }
 }
 
-class _SocialButton extends StatelessWidget {
+class _SocialIconButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
 
-  const _SocialButton({
+  const _SocialIconButton({
     required this.icon,
     required this.onTap,
   });
@@ -205,19 +227,46 @@ class _SocialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(24),
       onTap: onTap,
+      borderRadius: BorderRadius.circular(24),
       child: Container(
         width: 42,
         height: 42,
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: AppColors.white,
           shape: BoxShape.circle,
         ),
         child: Icon(
           icon,
-          color: AppColors.textPrimary,
           size: 22,
+          color: AppColors.textPrimary,
+        ),
+      ),
+    );
+  }
+}
+
+class PlaceholderPage extends StatelessWidget {
+  final String title;
+
+  const PlaceholderPage({
+    super.key,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        child: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );

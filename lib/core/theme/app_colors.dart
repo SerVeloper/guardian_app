@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  AppColors._();
 
-  // Color principal
-  static const Color primary = Color(0xFF026A75);
+  // Paleta principal
+  static const Color primary = Color(0xFF0B7881);
+  static const Color secondary = Color(0xFF63B6A1);
+  static const Color background = Color(0xFFD9D9D9);
+  static const Color surface = Color(0xFFF2F2F2);
 
-  // Color secundario
-  static const Color secondary = Color(0xFF5CB49B);
-
-  // Fondo principal
-  static const Color background = Color(0xFFEBEFEE);
-
-  // Superficie clara
-  static const Color surface = Color(0xFFE8E8E8);
-
-  // Colores auxiliares
-  static const Color textPrimary = Color(0xFF2B2B2B);
-  static const Color textSecondary = Color(0xFF848484);
-
+  // Texto y apoyo
   static const Color white = Colors.white;
   static const Color black = Colors.black;
-  static const Color border = Color(0xFFE3E3E3);
+  static const Color textPrimary = Color(0xFF1C1C1C);
+  static const Color textSecondary = Color(0xFF7A7A7A);
+  static const Color divider = Color(0xFFBDBDBD);
+
+  // Estados
+  static const Color shieldOverlay = Color(0x66FFFFFF);
 }
