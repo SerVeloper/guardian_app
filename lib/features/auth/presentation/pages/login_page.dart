@@ -128,15 +128,9 @@ class _LoginForm extends StatelessWidget {
         const SizedBox(height: 18),
         ElevatedButton(
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => const PlaceholderPage(
-                  title: 'Home temporal',
-                ),
-              ),
-            );
+            Navigator.pushReplacementNamed(context, '/home');
           },
-          child: const Text('Iniciar Sesión'),
+          child: const Text('Login'),
         ),
         const SizedBox(height: 28),
         const Row(
