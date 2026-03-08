@@ -4,6 +4,9 @@ import 'package:camera/camera.dart';
 import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import '../../../../core/theme/app_colors.dart';
+import '../widgets/slide_action_button.dart';
+import '../../../map/presentation/pages/map_page.dart';
 
 import '../../../../services/s3_service.dart';
 
@@ -37,6 +40,19 @@ class _EmergencyActivePageState extends State<EmergencyActivePage> {
   }
 
   Future<void> initCamera() async {
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SlideActionButton(
+          label: 'Iniciar recorrido',
+          backgroundColor: AppColors.primary,
+          knobColor: Colors.white,
+          iconColor: AppColors.primary,
+          onSubmit: () {
+            Navigator.pushNamed(context, '/map');
+          },
+        ),
+        const SizedBox(height: 16),
 
     final cameras = await availableCameras();
     final camera = cameras.first;
