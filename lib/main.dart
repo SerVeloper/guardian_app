@@ -28,6 +28,7 @@ class GuardianApp extends StatelessWidget {
         '/emergencia': (context) => const EmergenciaPage(),
         '/emergencia-record': (context) => const EmergencyActivePage(),
         '/emergencia-contacs': (context) => const EmergencyContactsPage(),
+
       },
     );
   }
