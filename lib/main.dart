@@ -4,6 +4,8 @@ import 'features/auth/presentation/pages/login_page.dart';
 import 'features/auth/presentation/pages/splash_page.dart';
 import 'features/home/presentation/pages/home_page.dart';
 import 'features/map/presentation/pages/map_page.dart';
+import 'features/home/presentation/pages/emergencias.dart';
+import 'features/home/presentation/pages/emergencia_record.dart';
 
 void main() {
   runApp(const GuardianApp());
@@ -24,6 +26,8 @@ class GuardianApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
         '/map': (context) => const MapPage(),
+        '/emergencia': (context) => const EmergenciaPage(),
+        '/emergencia-record': (context) => const EmergencyActivePage(),
       },
     );
   }

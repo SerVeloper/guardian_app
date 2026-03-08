@@ -160,17 +160,28 @@ class _ActionButtonsSection extends StatelessWidget {
           },
         ),
         const SizedBox(height: 16),
-        SlideActionButton(
-          label: 'Activar SOS',
-          backgroundColor: const Color(0xFFE80F2F),
-          knobColor: Colors.white,
-          iconColor: const Color(0xFFE80F2F),
-          onSubmit: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('SOS activado')),
-            );
-          },
-        ),
+
+SlideActionButton(
+  label: 'Activar SOS',
+  backgroundColor: const Color(0xFFE80F2F),
+  knobColor: Colors.white,
+  iconColor: const Color(0xFFE80F2F),
+  onSubmit: () async {
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('SOS activado')),
+    );
+
+    // Ir a pantalla de emergencia
+    Navigator.pushNamed(context, '/emergencia');
+
+    // Esperar 3 segundos
+    await Future.delayed(const Duration(seconds: 3));
+
+    // Ir a pantalla que empieza a grabar
+    Navigator.pushNamed(context, '/emergencia-record');
+  },
+),
       ],
     );
   }
