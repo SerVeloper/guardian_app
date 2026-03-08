@@ -6,6 +6,7 @@ import 'features/home/presentation/pages/home_page.dart';
 import 'features/map/presentation/pages/map_page.dart';
 import 'features/home/presentation/pages/emergencias.dart';
 import 'features/home/presentation/pages/emergencia_record.dart';
+import 'features/home/presentation/pages/emergency_contacts_page.dart';
 
 void main() {
   runApp(const GuardianApp());
@@ -28,6 +29,8 @@ class GuardianApp extends StatelessWidget {
         '/map': (context) => const MapPage(),
         '/emergencia': (context) => const EmergenciaPage(),
         '/emergencia-record': (context) => const EmergencyActivePage(),
+        '/emergencia-contacs': (context) => const EmergencyContactsPage(),
+
       },
     );
   }
